@@ -1,16 +1,102 @@
-import { Box, Image, Text } from '@chakra-ui/react'
-import React from 'react'
-import "./MovieRow.css"
+import { Box, Image, Text } from "@chakra-ui/react";
+import React, { useState } from "react";
+import { IoChevronBack, IoChevronForward } from "react-icons/io5";
 
-export default function MovieRow({title, items}) {
+export default function MovieRow({ title, items }) {
+  const [scrollX, setScrollX] = useState(0);
+
+  const handleLeftArrow = () => {
+    let x = scrollX + Math.round(window.innerWidth / 2);
+    if (x > 0) {
+      x = 0;
+    }
+    setScrollX(x);
+  };
+  const handleRightArrow = () => {
+    let x = scrollX + Math.round(window.innerWidth / 2);
+    let listW = items.results.length * 180;
+    if((window.innerWidth + listW) > x){
+      x = (window.innerWidth - listW) - 100;
+    }
+    setScrollX(x)
+  };
+
   return (
+    // MovieRow
     <Box>
-        <Text fontSize='xl'>{title}</Text>
-        <Box>
-            {items.results.length > 0 && items.results.map((item, key) => (
-                <Image key={key} boxSize='300px' src={`https://image.tmdb.org/t/p/w300${item.poster_path}`} alt={item.original_title}/>
-            ))}
+      <Box mb="30px">
+        <Text fontSize="xl" marginLeft="70px" fontWeight="700">
+          {title}
+        </Text>
+        <Box
+          mt="17px"
+          bg="rgba(0, 0, 0, 0.6)"
+          position="absolute"
+          w="40px"
+          h="300px"
+          zIndex="99"
+          left="0"
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          overflow="hidden"
+          opacity="0"
+          _hover={{ opacity: "1" }}
+          transition="all ease 0.5s"
+          onClick={handleLeftArrow}
+        >
+          <IoChevronBack fontSize="50" cursor="pointer" />
         </Box>
+        <Box
+          mt="17px"
+          bg="rgba(0, 0, 0, 0.6)"
+          position="absolute"
+          w="40px"
+          h="300px"
+          zIndex="99"
+          right="0"
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          overflow="hidden"
+          opacity="0"
+          _hover={{ opacity: "1" }}
+          transition="all ease 0.5s"
+          onClick={handleRightArrow}
+        >
+          <IoChevronForward fontSize="50" cursor="pointer" />
+        </Box>
+        {/* ListArea */}
+        <Box overflowX="hidden" paddingLeft="60px">
+          {/* List */}
+          <Box
+            width={items.results.length * 200}
+            ml={scrollX}
+            transition="all ease 0.5s"
+          >
+            {items.results.length > 0 &&
+              items.results.map((item, key) => (
+                // Item
+                <Box
+                  display="inline-block"
+                  w="190px"
+                  cursor="pointer"
+                  key={key}
+                >
+                  <Image
+                    transform="scale(0.9)"
+                    transition="all ease 0.2s"
+                    w="100%"
+                    key={key}
+                    src={`https://image.tmdb.org/t/p/w300${item.poster_path}`}
+                    alt={item.original_title}
+                    _hover={{ transform: "scale(1)" }}
+                  />
+                </Box>
+              ))}
+          </Box>
+        </Box>
+      </Box>
     </Box>
-  )
+  );
 }
