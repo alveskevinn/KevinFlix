@@ -22,7 +22,6 @@ export default function App() {
       let chosen = trending[0].items.results[randomChosen];
       setMovieList(list);
       setFeatureData(chosen);
-      console.log(chosen);
     };
     loadAll();
   }, []);

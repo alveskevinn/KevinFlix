@@ -25,7 +25,11 @@ export default function MovieRow({ title, items }) {
     // MovieRow
     <Box>
       <Box mb="30px">
-        <Text fontSize="xl" marginLeft="70px" fontWeight="700">
+        <Text fontSize="xl" marginLeft="70px" fontWeight="700" sx={{
+        "@media (max-width: 700px)": {
+          marginLeft: "20px"
+        }
+      }}>
           {title}
         </Text>
         <Box
@@ -33,7 +37,7 @@ export default function MovieRow({ title, items }) {
           bg="rgba(0, 0, 0, 0.6)"
           position="absolute"
           w="40px"
-          h="300px"
+          h="250px"
           zIndex="99"
           left="0"
           display="flex"
@@ -44,6 +48,11 @@ export default function MovieRow({ title, items }) {
           _hover={{ opacity: "1" }}
           transition="all ease 0.5s"
           onClick={handleLeftArrow}
+          sx={{
+            "@media (max-width: 700px)": {
+              opacity: "1"
+            }
+          }}
         >
           <IoChevronBack fontSize="50" cursor="pointer" />
         </Box>
@@ -52,7 +61,7 @@ export default function MovieRow({ title, items }) {
           bg="rgba(0, 0, 0, 0.6)"
           position="absolute"
           w="40px"
-          h="300px"
+          h="250px"
           zIndex="99"
           right="0"
           display="flex"
@@ -63,6 +72,11 @@ export default function MovieRow({ title, items }) {
           _hover={{ opacity: "1" }}
           transition="all ease 0.5s"
           onClick={handleRightArrow}
+          sx={{
+            "@media (max-width: 700px)": {
+              opacity: "1"
+            }
+          }}
         >
           <IoChevronForward fontSize="50" cursor="pointer" />
         </Box>

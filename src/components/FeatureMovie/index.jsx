@@ -7,13 +7,17 @@ export default function FeatureMovie({ item }) {
   const backgroundMovie = `url(https://image.tmdb.org/t/p/original${item.backdrop_path})}`;
   const yearMovie = new Date(item.release_date || item.first_air_date);
   const yearFormat = format(yearMovie, "yyyy");
-  console.log(yearFormat);
   return (
     <Box
       height="88vh"
       backgroundSize="cover"
       backgroundPosition="top"
       backgroundImage={backgroundMovie}
+      sx={{
+        "@media (max-width: 700px)": {
+          backgroundPosition:"center"
+        }
+      }}
     >
       <Box
         w="inherit"
@@ -27,12 +31,29 @@ export default function FeatureMovie({ item }) {
           color="white"
         >
           <Flex flexDirection="column" w="45vw" h="80vh" justifyContent="end">
-            <Text fontSize="6xl" marginLeft="60px" fontWeight="500" fontFamily="'Bebas Neue', cursive;">
+            <Text
+              fontSize="6xl"
+              marginLeft="60px"
+              fontWeight="500"
+              fontFamily="'Bebas Neue', cursive;"
+              sx={{
+                "@media (max-width: 700px)": {
+                  width: "200px",
+                  fontSize: "50px",
+                  marginLeft: "30px"
+                },
+              }}
+            >
               {item.title}
               {item.name}
             </Text>
             {/* info */}
-            <Box marginLeft="60px">
+            <Box marginLeft="60px"
+            sx={{
+              "@media (max-width: 700px)": {
+                marginLeft: "30px"
+              },
+            }}>
               {/* Pontos */}
               <Flex gap="20px" mb="8px" fontWeight="700">
                 <Box
@@ -40,24 +61,40 @@ export default function FeatureMovie({ item }) {
                   color="green"
                   borderRadius="10px"
                   boxSizing="border-box"
-                > 
+                >
                   {`Nota ${item.vote_average.toFixed(1)}`}
                 </Box>
                 {/* Ano de lançamento */}
-                <Box padding="3px 4px">{yearFormat}</Box>
+                <Box padding="3px 4px"
+                >{yearFormat}</Box>
               </Flex>
               {/* Descrição */}
-              <Box textIndent="20px" textAlign="justify" fontSize="15px">
-                {item.overview.length > 300 ? `${item.overview.substring(0,290)}...` : item.overview}
+              <Box
+                textIndent="20px"
+                textAlign="justify"
+                fontSize="15px"
+                sx={{
+                  "@media (max-width: 700px)": {
+                    display: "none",
+                  },
+                }}
+              >
+                {item.overview.length > 300
+                  ? `${item.overview.substring(0, 290)}...`
+                  : item.overview}
                 {console.log(item.overview.length)}
               </Box>
               {/* Botões */}
-              <Flex m="40px 0px" gap="20px">
+              <Flex m="40px 0px" gap="20px" w="300px">
                 <Button color="black" gap="5px">
                   {" "}
                   <IoPlaySharp fontSize="22px" /> Assistir
                 </Button>
-                <Button background="rgb(84,81,81)" gap="5px" _hover={{ background: "rgb(84,81,95)" }}>
+                <Button
+                  background="rgb(84,81,81)"
+                  gap="5px"
+                  _hover={{ background: "rgb(84,81,95)" }}
+                >
                   <IoInformationCircleOutline fontSize="22px" /> Mais
                   informações
                 </Button>

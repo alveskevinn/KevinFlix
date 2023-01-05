@@ -25,12 +25,19 @@ export default function Header({ black }) {
       padding="10px 0"
       transition="all ease 0.5s"
     >
-      <Box gap="25px" display="flex" fontSize="15px" alignItems="center">
+      <Box gap="25px" display="flex" fontSize="15px" alignItems="center"
+      sx={{
+        "@media (max-width: 700px)": {
+          gap: "0",
+          fontSize: "0"
+        }
+      }}>
         <Image
           ml="30px"
           w="80px"
           src="/public/Netflix-Logo-removebg-preview.png"
           cursor="pointer"
+          
         />
         <Text color="white" cursor="pointer">
           Início
