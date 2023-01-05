@@ -6,6 +6,7 @@ import "./App.css";
 import Tmdb from "./components/Tmdb/Tmdb";
 import FeatureMovie from "./components/FeatureMovie";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 export default function App() {
   const [movieList, setMovieList] = useState([]);
@@ -50,6 +51,7 @@ export default function App() {
             <MovieRow key={key} title={item.title} items={item.items} />
           ))}
         </Box>
+      <Footer />
       </Box>
     </ChakraProvider>
   );
